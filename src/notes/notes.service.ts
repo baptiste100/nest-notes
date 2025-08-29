@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { Note } from '@prisma/client';
+import { Note, Tag } from '@prisma/client';
 
 export interface NoteCreationDto {
   title: string,
@@ -18,6 +18,18 @@ export class NotesService {
     return this.prisma.note.findUnique({
       where: {
         id: +noteId
+      }
+    });
+  }
+
+  findTags(noteId: string) : Promise<Tag[]> {
+    return this.prisma.tag.findMany({
+      where: {
+        notes: {
+          some: {
+            id: +noteId
+          }
+        }
       }
     });
   }

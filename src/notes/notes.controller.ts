@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import type { NoteCreationDto, NoteUpdateDto } from './notes.service';
-import type { Note } from '@prisma/client';
+import type { Note, Tag } from '@prisma/client';
 
 @Controller('notes')
 export class NotesController {
@@ -10,6 +10,11 @@ export class NotesController {
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Note | null> {
     return this.notesService.findOne(id);
+  }
+
+  @Get(':id/tags')
+  findTags(@Param('id') id: string) : Promise<Tag[]> {
+    return this.notesService.findTags(id);
   }
 
   @Post()
