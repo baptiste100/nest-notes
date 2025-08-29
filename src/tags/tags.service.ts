@@ -1,7 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
+import { Tag } from '@prisma/client';
 
 @Injectable()
 export class TagsService {
     constructor(private prisma: PrismaService) {}
+
+    findOne(tagId: string) : Promise<Tag | null> {
+        return this.prisma.tag.findUnique({
+            where: {
+                id: +tagId
+            },
+        })
+    }
 }
