@@ -2,6 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Tag } from '@prisma/client';
 
+export interface TagCreateDto {
+    name: string,
+}
+
 @Injectable()
 export class TagsService {
     constructor(private prisma: PrismaService) {}
@@ -15,6 +19,15 @@ export class TagsService {
             where: {
                 id: +tagId
             },
+        })
+    }
+
+    create(tagCreateDto: TagCreateDto) {
+        return this.prisma.tag.create({
+            data: {
+                name: tagCreateDto.name,
+                createdAt: new Date()
+            }
         })
     }
 }
