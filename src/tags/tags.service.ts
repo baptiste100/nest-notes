@@ -41,4 +41,12 @@ export class TagsService {
             }
         });
     }
+
+    delete(tagId: string) {
+        return this.prisma.tag.delete({
+            where: {
+                id: +tagId
+            }
+        });
+    }
 }
