@@ -8,6 +8,8 @@ export interface NoteCreationDto {
   authorId: number
 }
 
+export type NoteUpdateDto = Omit<NoteCreationDto, "authorId">;
+
 @Injectable()
 export class NotesService {
   constructor(private prisma: PrismaService) {}
@@ -33,5 +35,17 @@ export class NotesService {
         }
       }
     });
+  }
+
+  update(noteId: string, updateNoteDto: NoteUpdateDto) {
+    return this.prisma.note.update({
+      where: {
+        id: +noteId
+      },
+      data: {
+        title: updateNoteDto.title,
+        content: updateNoteDto.content
+      }
+    })
   }
 }
