@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import type { NoteCreationDto, NoteUpdateDto } from './notes.service';
 import type { Note } from '@prisma/client';
@@ -20,5 +20,10 @@ export class NotesController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateNoteDto: NoteUpdateDto) {
     return this.notesService.update(id, updateNoteDto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.notesService.delete(id);
   }
 }

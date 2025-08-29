@@ -46,6 +46,14 @@ export class NotesService {
         title: updateNoteDto.title,
         content: updateNoteDto.content
       }
-    })
+    });
+  }
+
+  delete(noteId: string) {
+    return this.prisma.note.delete({
+      where: {
+        id: +noteId
+      }
+    });
   }
 }
