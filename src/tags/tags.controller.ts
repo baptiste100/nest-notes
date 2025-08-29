@@ -6,6 +6,11 @@ import { Tag } from '@prisma/client';
 export class TagsController {
     constructor(private tagsService: TagsService) {}
 
+    @Get()
+    findAll() : Promise<Tag[]> {
+        return this.tagsService.findAll();
+    }
+
     @Get(':id')
     findOne(@Param('id') id : string) : Promise<Tag | null> {
         return this.tagsService.findOne(id);

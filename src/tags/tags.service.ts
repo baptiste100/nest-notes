@@ -6,6 +6,10 @@ import { Tag } from '@prisma/client';
 export class TagsService {
     constructor(private prisma: PrismaService) {}
 
+    findAll() : Promise<Tag[]> {
+        return this.prisma.tag.findMany();
+    }
+
     findOne(tagId: string) : Promise<Tag | null> {
         return this.prisma.tag.findUnique({
             where: {
