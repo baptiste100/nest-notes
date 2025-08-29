@@ -30,4 +30,15 @@ export class TagsService {
             }
         })
     }
+
+    update(tagId: string, tagUpdateDto: TagCreateDto) {
+        return this.prisma.tag.update({
+            where: {
+                id: +tagId
+            },
+            data: {
+                name: tagUpdateDto.name
+            }
+        });
+    }
 }
