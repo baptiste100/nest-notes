@@ -11,10 +11,18 @@ export class UsersService {
         return this.prisma.user.findMany();
     }
 
-    findOne(userId: string) : Promise<User | null> {
+    findOneById(userId: string) : Promise<User | null> {
         return this.prisma.user.findUnique({
             where: {
                 id: +userId
+            },
+        })
+    }
+
+    findOneByEmail(email: string) : Promise<User | null> {
+        return this.prisma.user.findUnique({
+            where: {
+                email: email
             },
         })
     }
