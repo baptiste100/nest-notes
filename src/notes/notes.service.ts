@@ -1,14 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Note, Tag } from '@prisma/client';
-
-export interface NoteCreationDto {
-  title: string,
-  content: string,
-  authorId: number
-}
-
-export type NoteUpdateDto = Omit<NoteCreationDto, "authorId">;
+import type { NoteCreationDto, NoteUpdateDto } from '../types/notes.types';
 
 @Injectable()
 export class NotesService {

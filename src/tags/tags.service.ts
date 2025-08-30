@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Tag } from '@prisma/client';
-
-export interface TagCreateDto {
-    name: string,
-}
+import { TagCreateDto } from '../types/tags.types';
 
 @Injectable()
 export class TagsService {

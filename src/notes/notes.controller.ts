@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { NotesService } from './notes.service';
-import type { NoteCreationDto, NoteUpdateDto } from './notes.service';
 import type { Note, Tag } from '@prisma/client';
+import type { NoteCreationDto, NoteUpdateDto } from '../types/notes.types';
 
 @Controller('notes')
 export class NotesController {

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { TagsService } from './tags.service';
-import type { TagCreateDto } from './tags.service';
 import { Tag } from '@prisma/client';
+import type { TagCreateDto } from '../types/tags.types';
 
 @Controller('tags')
 export class TagsController {
