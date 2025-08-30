@@ -23,7 +23,8 @@ export class UsersService {
         return this.prisma.user.create({
             data: {
                 name: userCreationDto.name,
-                email: userCreationDto.email
+                email: userCreationDto.email,
+                password: userCreationDto.password
             }
         })
     }
@@ -35,7 +36,7 @@ export class UsersService {
             },
             data: {
                 name: userUpdateDto.name,
-                email: userUpdateDto.email
+                email: userUpdateDto.email,
             }
         });
     }

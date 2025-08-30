@@ -10,6 +10,7 @@ async function main() {
     data: {
       email: 'alice@example.com',
       name: 'Alice Dupont',
+      password: '123456'
     },
   });
 
@@ -17,6 +18,7 @@ async function main() {
     data: {
       email: 'bob@example.com',
       name: 'Bob Martin',
+      password:'000000'
     },
   });
 
