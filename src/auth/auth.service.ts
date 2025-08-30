@@ -1,14 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AuthBodyDto } from '../types/auth.types';
 import { UsersService } from '../users/users.service';
 import { compare } from 'bcrypt';
 import { User } from '@prisma/client';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
     constructor(private usersService: UsersService) {}
 
-    async login(authBodyDto: AuthBodyDto) {
+    async login(authBodyDto: LoginDto) {
         const { email, password } = authBodyDto;
 
         const user: User | null = await this.usersService.findOneByEmail(email);
