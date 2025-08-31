@@ -7,7 +7,7 @@ export class AuthController {
     constructor(private authService: AuthService) {}
 
     @Get('login')
-    login(@Body() authBodyDto: LoginDto) {
+    login(@Body() authBodyDto: LoginDto) : Promise<{ access_token: string }> {
         return this.authService.login(authBodyDto);
     }
 }
