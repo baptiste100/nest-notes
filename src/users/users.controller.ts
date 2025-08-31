@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { User } from '@prisma/client';
+import { Note, User } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
@@ -15,6 +15,11 @@ export class UsersController {
     @Get('email/:email')
     findOneByEmail(@Param('email') email: string) : Promise<User | null> {
         return this.usersService.findOneByEmail(email);
+    }
+
+    @Get(':id/notes')
+    findNotes(@Param('id') id : string) : Promise<Note[]> {
+        return this.usersService.findNotes(id);
     }
 
     @Get(':id')

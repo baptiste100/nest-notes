@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { User } from '@prisma/client';
+import { User, Note } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 
@@ -10,6 +10,14 @@ export class UsersService {
 
     async findAll() : Promise<User[]> {
         return this.prisma.user.findMany();
+    }
+
+    async findNotes(userId: string) : Promise<Note[]> {
+        return this.prisma.note.findMany({
+            where: {
+                authorId: +userId
+            }
+        })
     }
 
     async findOneById(userId: string) : Promise<User | null> {
