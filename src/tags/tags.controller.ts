@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { TagsService } from './tags.service';
 import { Tag } from '@prisma/client';
-import type { TagCreateDto } from '../types/tags.types';
+import { CreateTagDto } from './dto/create-tag.dto';
 
 @Controller('tags')
 export class TagsController {
@@ -18,12 +18,12 @@ export class TagsController {
     }
 
     @Post()
-    create(@Body() tagCreateDto: TagCreateDto) {
+    create(@Body() tagCreateDto: CreateTagDto) {
         return this.tagsService.create(tagCreateDto);
     }
 
     @Patch(':id')
-    update(@Param('id') id : string, @Body() tagUpdateDto: TagCreateDto) {
+    update(@Param('id') id : string, @Body() tagUpdateDto: CreateTagDto) {
         return this.tagsService.update(id, tagUpdateDto);
     }
 

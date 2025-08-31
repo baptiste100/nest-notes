@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Tag } from '@prisma/client';
-import { TagCreateDto } from '../types/tags.types';
+import { CreateTagDto } from './dto/create-tag.dto';
 
 @Injectable()
 export class TagsService {
@@ -19,7 +19,7 @@ export class TagsService {
         })
     }
 
-    create(tagCreateDto: TagCreateDto) {
+    create(tagCreateDto: CreateTagDto) {
         return this.prisma.tag.create({
             data: {
                 name: tagCreateDto.name,
@@ -28,7 +28,7 @@ export class TagsService {
         })
     }
 
-    update(tagId: string, tagUpdateDto: TagCreateDto) {
+    update(tagId: string, tagUpdateDto: CreateTagDto) {
         return this.prisma.tag.update({
             where: {
                 id: +tagId
