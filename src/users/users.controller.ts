@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
-import type { UserCreationDto } from '../types/user.types';
 import { User } from '@prisma/client';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -23,12 +23,12 @@ export class UsersController {
     }
 
     @Post()
-    create(@Body() userCreationDto: UserCreationDto) {
+    create(@Body() userCreationDto: CreateUserDto) {
         return this.usersService.create(userCreationDto);
     }
 
     @Patch(':id')
-    update(@Param('id') id : string, @Body() userUpdateDto: UserCreationDto) {
+    update(@Param('id') id : string, @Body() userUpdateDto: CreateUserDto) {
         return this.usersService.update(id, userUpdateDto);
     }
 
