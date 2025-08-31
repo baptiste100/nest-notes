@@ -1,11 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Note, Tag } from '@prisma/client';
-import type { NoteCreationDto, NoteUpdateDto } from '../types/notes.types';
+import { CreateNoteDto } from './dto/create-note.dto';
+import { UpdateNoteDto } from './dto/update-note.dto';
 
 @Injectable()
 export class NotesService {
   constructor(private prisma: PrismaService) {}
+
+  findAll(): Promise<Note[]> {
+    return this.prisma.note.findMany();
+  }
 
   findOne(noteId: string): Promise<Note | null> {
     return this.prisma.note.findUnique({
@@ -27,7 +32,7 @@ export class NotesService {
     });
   }
 
-  create(createNoteDto: NoteCreationDto) {
+  create(createNoteDto: CreateNoteDto) {
     return this.prisma.note.create({
       data: {
         title: createNoteDto.title,
@@ -42,7 +47,7 @@ export class NotesService {
     });
   }
 
-  update(noteId: string, updateNoteDto: NoteUpdateDto) {
+  update(noteId: string, updateNoteDto: UpdateNoteDto) {
     return this.prisma.note.update({
       where: {
         id: +noteId
