@@ -32,7 +32,7 @@ export class NotesService {
     });
   }
 
-  create(createNoteDto: CreateNoteDto) {
+  create(createNoteDto: CreateNoteDto, userId: number) {
     return this.prisma.note.create({
       data: {
         title: createNoteDto.title,
@@ -40,7 +40,7 @@ export class NotesService {
         createdAt: new Date(),
         author: {
           connect: {
-            id: createNoteDto.authorId
+            id: userId
           }
         }
       }

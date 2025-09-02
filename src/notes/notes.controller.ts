@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import type { Note, Tag } from '@prisma/client';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import type { RequestWithUser } from '../auth/types/jwt-payload.type';
 
 @Controller('notes')
 export class NotesController {
@@ -24,8 +25,9 @@ export class NotesController {
   }
 
   @Post()
-  create(@Body() createNoteDto: CreateNoteDto) {
-    return this.notesService.create(createNoteDto);
+  create(@Body() createNoteDto: CreateNoteDto, @Req() req: RequestWithUser) {
+    const userId = req.user.sub;
+    return this.notesService.create(createNoteDto, userId);
   }
 
   @Patch(':id')
